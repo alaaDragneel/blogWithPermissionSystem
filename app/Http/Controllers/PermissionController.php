@@ -109,7 +109,7 @@ class PermissionController extends Controller
     {
         $permission = Permission::findOrFail($id);
         $this->validate($request, [
-        'name'=>'required|max:40',
+            'name'=>'required|max:40',
         ]);
         $input = $request->all();
         $permission->fill($input)->save();

@@ -11,7 +11,6 @@
     <title>{{ config('app.name', 'Laravel') }} @yield('title')</title>
 
     <!-- Styles -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" integrity="sha256-NuCn4IvuZXdBaFKJOAcsU2Q3ZpwbdFisd5dux4jkQ5w=" crossorigin="anonymous" />
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
 <body>
@@ -49,6 +48,17 @@
                             <li><a href="{{ route('login') }}">Login</a></li>
                             <li><a href="{{ route('register') }}">Register</a></li>
                         @else
+                            @role('Admin') {{-- Laravel-permission blade helper --}}
+                            <li>
+                                <a href="{{ route('roles.index') }}">Roles</a>
+                            </li>
+                            <li>
+                                <a href="{{ route('permissions.index') }}">Permissions</a>
+                            </li>
+                            <li>
+                                <a href="{{ route('users.index') }}">Users</a>
+                            </li>
+                            @endrole
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                                     {{ Auth::user()->name }} <span class="caret"></span>
@@ -56,18 +66,6 @@
 
                                 <ul class="dropdown-menu" role="menu">
                                     <li>
-                                        @role('Admin') {{-- Laravel-permission blade helper --}}
-                                        <a href="#"><i class="fa fa-btn fa-unlock"></i> Admin</a>
-                                        <a href="{{ url('/roles') }}">
-                                            <i class="fa fa-btn fa-ban"></i> Roles
-                                        </a>
-                                        <a href="{{ url('/permissions') }}">
-                                            <i class="fa fa-btn fa-info"></i> Permissions
-                                        </a>
-                                        <a href="{{ url('/users') }}">
-                                            <i class="fa fa-btn fa-users"></i> Users
-                                        </a>
-                                        @endrole
                                         <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                                             Logout
                                         </a>
